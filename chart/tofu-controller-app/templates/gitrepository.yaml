@@ -6,5 +6,6 @@ metadata:
 spec:
   interval: 1m
   url: {{ .Values.terraform.git.url }}
+  subPath: {{ .Values.terraform.git.subPath }}
   ref:
     branch: {{ .Values.terraform.git.branch }}

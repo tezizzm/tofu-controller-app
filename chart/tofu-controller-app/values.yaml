@@ -31,7 +31,8 @@ terraform:
   git:
     url: "https://github.com/tezizzm/tofu-controller-app"
     branch: "main"
-    path: "chart/tofu-controller-app/infrastructure"
+    subPath: "chart/tofu-controller-app"
+    path: "infrastructure"
 
 serviceAccount:
   name: "tf-runner"
