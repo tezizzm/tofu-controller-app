@@ -1,0 +1,10 @@
+---
+apiVersion: kots.io/v1beta1
+kind: Application
+metadata:
+  name: tofu-controller-app
+spec:
+  title: Tofu Controller Application
+  statusInformers:
+    - deployment/tofu-controller-app
+  icon: https://png.pngtree.com/png-clipart/20190619/original/pngtree-vector-shuffle-icon-png-image_4013735.jpg

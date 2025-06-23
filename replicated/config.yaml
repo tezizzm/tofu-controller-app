@@ -1,0 +1,65 @@
+apiVersion: kots.io/v1beta1
+kind: Config
+metadata:
+  name: tofu-controller-app-config
+spec:
+  groups:
+    - name: app_settings
+      title: "App Settings"
+      items:
+        - name: image_tag
+          title: "Image Tag"
+          type: text
+          default: "0.4"
+          required: true
+    - name: tf_git_repo_settings
+      title: "Terraform Git Repository Settings"
+      description: "Configure the Terraform Git Repository"
+      items:
+        - name: tf_git_repo_url
+          title: Git Repository URL
+          type: text
+          required: true
+        - name: tf_git_repo_branch
+          title: Git Repository Branch
+          type: text
+          required: true
+          default: "main"
+        - name: tf_git_repo_path
+          title: Git Repository Path
+          type: text
+          required: true
+          default: "chart/tofu-controller-app/infrastructure"
+    - name: aws_settings
+      title: "AWS Credentials"
+      items:
+        - name: aws_access_key
+          title: "AWS Access Key ID"
+          type: text
+          required: true
+        - name: aws_secret_key
+          title: "AWS Secret Access Key"
+          type: password
+          required: true
+        - name: aws_region
+          title: "AWS Region"
+          type: text
+          required: true
+          default: "us-east-1"
+    - name: db_settings
+      title: "Database Settings"
+      items:
+        - name: db_name
+          title: "Database Name"
+          type: text
+          required: true
+          default: "myapp"
+        - name: db_username
+          title: "DB Username"
+          type: text
+          required: true
+          default: "myuser"
+        - name: db_password
+          title: "DB Password"
+          type: password
+          required: true

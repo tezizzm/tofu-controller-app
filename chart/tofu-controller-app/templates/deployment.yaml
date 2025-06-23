@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "tofu-controller-app.fullname" . }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ include "tofu-controller-app.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "tofu-controller-app.name" . }}
+    spec:
+      containers:
+        - name: tofu-controller-app
+          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: rds-output
+                  key: DB_HOST
+          envFrom:
+            - secretRef:
+                name: {{ include "tofu-controller-app.fullname" . }}-db-creds
+          ports:
+            - containerPort: 3000

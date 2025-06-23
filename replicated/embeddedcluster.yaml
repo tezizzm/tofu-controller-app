@@ -1,0 +1,20 @@
+apiVersion: embeddedcluster.replicated.com/v1beta1
+kind: Config
+spec:
+  version: 2.6.0+k8s-1.31
+  extensions:
+    helm:
+      repositories:
+        - name: fluxcd-community
+          url: https://fluxcd-community.github.io/helm-charts
+        - name: tofu-controller
+          url: https://flux-iac.github.io/tofu-controller
+      charts:
+        - name: flux
+          chartName: fluxcd-community/flux2
+          version: "2.16.0"
+          namespace: flux-system
+        - name: tofu-controller
+          chartName: tofu-controller/tofu-controller
+          version: "0.16.0-rc.5"
+          namespace: flux-system

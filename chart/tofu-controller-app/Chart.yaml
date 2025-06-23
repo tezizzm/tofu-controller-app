@@ -1,0 +1,10 @@
+apiVersion: v2
+name: tofu-controller-app
+description: A Node.js app connecting to PostgreSQL
+type: application
+version: 0.1.13
+appVersion: "1.0"
+dependencies:
+- name: replicated
+  version: "1.6.0"
+  repository: "oci://chart.slackernews.io/library"

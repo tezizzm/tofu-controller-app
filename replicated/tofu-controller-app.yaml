@@ -1,0 +1,30 @@
+apiVersion: kots.io/v1beta2
+kind: HelmChart
+metadata:
+  name: tofu-controller-app
+spec:
+  chart:
+    name: tofu-controller-app
+    chartVersion: 0.1.13
+
+  # Map values from the Admin Console Config into your chart’s values.yaml
+  values:
+    image:
+      pullSecrets:
+        - name: '{{repl ImagePullSecretName }}'
+      registry: '{{repl HasLocalRegistry | ternary LocalRegistryHost "proxy.thewindyvalley.com" }}'
+      repository: '{{repl HasLocalRegistry | ternary LocalRegistryNamespace (print "proxy/" (LicenseFieldValue "appSlug") "/429114214526.dkr.ecr.us-west-2.amazonaws.com" ) }}/tofu-controller-app'
+      tag: repl{{ ConfigOption "image_tag" }}
+    aws:
+      accessKeyId: repl{{ ConfigOption "aws_access_key" }}
+      secretAccessKey: repl{{ ConfigOption "aws_secret_key" }}
+      region: repl{{ ConfigOption "aws_region" }}
+    db:
+      name: repl{{ ConfigOption "db_name" }}
+      user: repl{{ ConfigOption "db_username" }}
+      password: repl{{ ConfigOption "db_password" }}
+    terraform:
+      git:
+        url: repl{{ ConfigOption "tf_git_repo_url" }}
+        branch: repl{{ ConfigOption "tf_git_repo_branch" }}
+        path: repl{{ ConfigOption "tf_git_repo_path" }}

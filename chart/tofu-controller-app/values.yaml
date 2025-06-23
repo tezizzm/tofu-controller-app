@@ -1,0 +1,38 @@
+image:
+  registry: proxy.thewindyvalley.com
+  repository: anonymous/index.docker.io/tezizzm/tofu-controller-app
+  tag: "0.4"
+  pullPolicy: IfNotPresent
+  pullSecrets:
+    - name: tofu-controller-app-pull-secret
+
+aws:
+  accessKeyId: ""
+  secretAccessKey: ""
+  region: "us-west-2"
+
+vpc:
+  cidr: "10.0.0.0/16"
+
+privateSubnets:
+  - "10.0.1.0/24"
+  - "10.0.2.0/24"
+
+db:
+  host: ""
+  name: "myapp"
+  user: "myuser"
+  port: 5432
+  password: ""
+
+# (Optional) allow customizing TF hook behavior
+terraform:
+  enabled: true
+  hookAnnotations:
+    install: "post-install"
+    deletePolicy: "hook-succeeded"
+  git:
+    url: "https://github.com/tezizzm/tofu-controller-app"
+    branch: "main"
+    path: "chart/tofu-controller-app/infrastructure"
+

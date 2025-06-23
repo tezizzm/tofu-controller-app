@@ -1,0 +1,27 @@
+apiVersion: app.k8s.io/v1beta1
+kind: Application
+metadata:
+  name: "tofu-controller-app"
+  labels:
+    app.kubernetes.io/name: "tofu-controller-app"
+    app.kubernetes.io/version: "0.1.0"
+spec:
+  selector:
+    matchLabels:
+     app.kubernetes.io/name: "tofu-controller-app"
+  componentKinds:
+    - group: core
+      kind: Service
+    - group: apps
+      kind: Deployment
+  descriptor:
+    version: "1.0.0"
+    description: "Tofu Controller App"
+    icons:
+        - src: "https://png.pngtree.com/png-clipart/20190619/original/pngtree-vector-shuffle-icon-png-image_4013735.jpg"
+          type: "image/jpeg"
+    type: tofu-controller-app
+    links:
+      - description: 🔗 Open Tofu Controller App
+        url: "https://tofu-controller-app"
+#      - description: BMC Admin

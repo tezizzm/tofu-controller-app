@@ -1,0 +1,46 @@
+{{- if .Values.terraform.enabled }}
+apiVersion: infra.contrib.fluxcd.io/v1alpha2
+kind: Terraform
+metadata:
+  name: {{ include "tofu-controller-app.fullname" . }}-rds
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    "helm.sh/hook": {{ .Values.terraform.hookAnnotations.install }}
+    "helm.sh/hook-delete-policy": {{ .Values.terraform.hookAnnotations.deletePolicy }}
+spec:
+  sourceRef:
+    kind: GitRepository
+    name: {{ include "tofu-controller-app.fullname" . }}-git
+    namespace: flux-system
+  path: {{ .Values.terraform.git.path }}
+
+  approvePlan: auto
+
+  values:
+    - name: aws_region
+      stringValue: "{{ .Values.aws.region }}"
+    - name: vpc_cidr
+      stringValue: "{{ .Values.vpc.cidr }}"
+    - name: private_subnets
+      values:
+        {{- range .Values.privateSubnets }}
+        - "{{ . }}"
+        {{- end }}
+    - name: db_name
+      stringValue: "{{ .Values.db.name }}"
+    - name: db_username
+      stringValue: "{{ .Values.db.user }}"
+    - name: db_password
+      stringValue: "{{ .Values.db.password }}"
+
+  # Capture Terraform outputs (e.g. db_endpoint) into a k8s Secret
+  writeOutputsToSecret:
+    name: rds-output
+
+  # Mount the AWS creds secret into the runner Pod
+  runnerPodTemplate:
+    spec:
+      envFrom:
+      - secretRef:
+          name: aws-credentials
+{{- end }}
