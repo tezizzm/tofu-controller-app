@@ -28,11 +28,11 @@ db:
 # (Optional) allow customizing TF hook behavior
 terraform:
   enabled: true
-  hookAnnotations:
-    install: "post-install"
-    deletePolicy: "hook-succeeded"
   git:
     url: "https://github.com/tezizzm/tofu-controller-app"
     branch: "main"
     path: "chart/tofu-controller-app/infrastructure"
+
+serviceAccount:
+  name: "tf-runner"
 

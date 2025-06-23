@@ -2,7 +2,7 @@ apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: GitRepository
 metadata:
   name: {{ include "tofu-controller-app.fullname" . }}-git
-  namespace: flux-system
+  namespace: {{ .Release.Namespace }}
 spec:
   interval: 1m
   url: {{ .Values.terraform.git.url }}

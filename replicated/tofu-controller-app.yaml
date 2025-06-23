@@ -5,7 +5,7 @@ metadata:
 spec:
   chart:
     name: tofu-controller-app
-    chartVersion: 0.1.13
+    chartVersion: 0.1.17
 
   # Map values from the Admin Console Config into your chart’s values.yaml
   values:

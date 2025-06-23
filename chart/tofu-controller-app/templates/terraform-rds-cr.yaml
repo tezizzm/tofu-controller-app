@@ -4,15 +4,13 @@ kind: Terraform
 metadata:
   name: {{ include "tofu-controller-app.fullname" . }}-rds
   namespace: {{ .Release.Namespace }}
-  annotations:
-    "helm.sh/hook": {{ .Values.terraform.hookAnnotations.install }}
-    "helm.sh/hook-delete-policy": {{ .Values.terraform.hookAnnotations.deletePolicy }}
 spec:
   sourceRef:
     kind: GitRepository
     name: {{ include "tofu-controller-app.fullname" . }}-git
-    namespace: flux-system
+    namespace: {{ .Release.Namespace }}
   path: {{ .Values.terraform.git.path }}
+  interval: 1m
 
   approvePlan: auto
 
