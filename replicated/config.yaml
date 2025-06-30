@@ -29,7 +29,7 @@ spec:
           title: Git Repository Path
           type: text
           required: true
-          default: "chart/tofu-controller-app/infrastructure"
+          default: "infrastructure"
     - name: aws_settings
       title: "AWS Credentials"
       items:
