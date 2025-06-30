@@ -20,6 +20,7 @@ spec:
           title: Git Repository URL
           type: text
           required: true
+          default: "https://github.com/tezizzm/tofu-controller-app.git"
         - name: tf_git_repo_branch
           title: Git Repository Branch
           type: text

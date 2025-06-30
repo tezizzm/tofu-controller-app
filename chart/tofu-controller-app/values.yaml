@@ -24,6 +24,8 @@ db:
   user: "myuser"
   port: 5432
   password: ""
+  instanceClass: "db.t3.micro"
+  allocatedStorage: 20
 
 # (Optional) allow customizing TF hook behavior
 terraform:

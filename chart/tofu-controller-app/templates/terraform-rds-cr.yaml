@@ -14,22 +14,24 @@ spec:
 
   approvePlan: auto
 
-  values:
+  vars:
     - name: aws_region
-      stringValue: "{{ .Values.aws.region }}"
+      value: "{{ .Values.aws.region }}"
     - name: vpc_cidr
-      stringValue: "{{ .Values.vpc.cidr }}"
+      value: "{{ .Values.vpc.cidr }}"
     - name: private_subnets
-      values:
-        {{- range .Values.privateSubnets }}
-        - "{{ . }}"
-        {{- end }}
+      value:
+{{ toYaml .Values.privateSubnets | indent 8 }}
+    - name: db_instance_class
+      value: "{{ .Values.db.instanceClass | default "db.t3.micro" }}"
+    - name: db_allocated_storage
+      value: "{{ .Values.db.allocatedStorage | default 20 }}"
     - name: db_name
-      stringValue: "{{ .Values.db.name }}"
+      value: "{{ .Values.db.name }}"
     - name: db_username
-      stringValue: "{{ .Values.db.user }}"
+      value: "{{ .Values.db.user }}"
     - name: db_password
-      stringValue: "{{ .Values.db.password }}"
+      value: "{{ .Values.db.password }}"
 
   # Capture Terraform outputs (e.g. db_endpoint) into a k8s Secret
   writeOutputsToSecret:
