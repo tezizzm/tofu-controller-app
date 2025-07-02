@@ -8,7 +8,7 @@ output "private_subnet_ids" {
   value       = module.vpc.private_subnets
 }
 
-output "DB_HOST" {
+output "DB_HOST_2" {
   description = "Postgres endpoint"
   value       = aws_db_instance.postgres.address
 }
