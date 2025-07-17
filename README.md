@@ -244,18 +244,6 @@ To modify the embedded cluster configuration:
 4. Test thoroughly
 5. Submit a pull request
 
-## 📄 License
-
-[Add your license information here]
-
-## 🆘 Support
-
-For issues and questions:
-
-1. Check the [documentation](link-to-docs)
-2. Search existing [issues](link-to-issues)
-3. Create a new issue with detailed information
-
 ## 📚 Additional Resources
 
 - [Terraform Documentation](https://www.terraform.io/docs)
